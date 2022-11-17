@@ -9,7 +9,7 @@ const { validateJWt } = require("../middlewares/validatorJWT.middleware")
 
 
 // imortamos los controladores
-const { usuarios, insertUser, deleteUser, updateUser, login } = require("../controllers/controllerUser.js")
+const { usuarios, insertUser, deleteUser, updateUser, login, profile } = require("../controllers/controllerUser.js")
 
 
 // RUTAS 
@@ -46,12 +46,7 @@ router.post("/usuarios/login", [
 router.get('/', [
     validateJWt
 
-], (req, res) => {
-    res.status(200).json({
-        id: req['id'],
-        msg: 'Pefil usuario ok'
-    })
-})
+], profile)
 
 // exportamos ruta
 module.exports = router

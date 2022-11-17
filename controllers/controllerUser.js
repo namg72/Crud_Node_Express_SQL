@@ -175,6 +175,14 @@ controllerUser.login = ((req, res) => {
     }
 })
 
+// Control de acceso mediante perfiles
+controllerUser.profile = ((req, res) => {
+    res.status(200).json({
+        id: req['id'],
+        msg: 'Pefil usuario ok'
+    })
+})
+
 
 
 module.exports = controllerUser;
