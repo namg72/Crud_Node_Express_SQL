@@ -1,14 +1,20 @@
 //nos traemos el modul sql
 const mysql = require("mysql");
 
+
+// Nos tramemos la variable de entorno
+
+const dotenv = require("dotenv");
+dotenv.config();
+
 //parametrizamos la conexdion
 
 const conexion = mysql.createConnection({
-    host: 'localhost',
-    port: 3360,
-    user: 'root',
-    password: '',
-    database: 'libreria'
+    host: process.env.HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 
 })
 
@@ -16,9 +22,9 @@ const conexion = mysql.createConnection({
 conexion.connect((err) => {
     if (err) {
         throw err
-        console.log(`No se ha podido conectar a la base de datos ${conexion.config.database} ${err.message}`);
+        console.log(`No se ha podido conectar a la base de datos ${process.env.DB_DATABASE} ${err.message}`);
 
-    } else console.log(`Conectado correctamente a la base de datos ${conexion.config.database}`);
+    } else console.log(`Conectado correctamente a la base de datos ${process.env.DB_DATABASE}`);
 
 })
 

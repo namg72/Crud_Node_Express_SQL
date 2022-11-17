@@ -4,8 +4,11 @@ const router = express.Router();
 //requerimos el metodo check del paquete express-validator;
 const { check } = require("express-validator");
 
+// importamos el middleware para validar el jwt
+const { validateJWt } = require("../middlewares/validatorJWT.middleware")
 
 
+// imortamos los controladores
 const { usuarios, insertUser, deleteUser, updateUser, login } = require("../controllers/controllerUser.js")
 
 
@@ -39,6 +42,16 @@ router.post("/usuarios/login", [
 ], login);
 
 
+// ruta para comprobar que en las petiicones get el jwt es correcto 
+router.get('/', [
+    validateJWt
+
+], (req, res) => {
+    res.status(200).json({
+        id: req['id'],
+        msg: 'Pefil usuario ok'
+    })
+})
 
 // exportamos ruta
 module.exports = router

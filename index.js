@@ -1,3 +1,6 @@
+// limpiamos la consola
+console.clear();
+
 // Nos traemos express y lo inicializamos
 
 const express = require("express");
@@ -21,7 +24,7 @@ app.use(autoresRouter);
 app.use(userRouter);
 
 // PUERTO DE ESCUCHA (Lo tenemos definido en una variable de entorno)
-app.listen(process.env.PORT, () => {
+app.listen(process.env.SERVER_PORT, () => {
 
-    console.log(`servidor escuchando en localhost:${process.env.PORT}`);
+    console.log(`servidor escuchando en localhost:${process.env.SERVER_PORT}`);
 })
