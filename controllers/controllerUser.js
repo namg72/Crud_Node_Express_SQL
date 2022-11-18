@@ -17,17 +17,6 @@ const bcrypt = require("bcryptjs");
 // importamos la funcion para crear el token
 const { crearJWT } = require("../helpers/jwt.helper")
 
-//Funcion para validar usuarios
-function validarUser(req, res) {
-
-    const validator = validationResult(req);
-    if (validator.errors.length > 0) {
-        res.status(400).json(validator.errors)
-        return;
-    }
-
-
-}
 
 //mostrar usuarios
 controllerUser.usuarios = ((req, res) => {
@@ -52,8 +41,11 @@ controllerUser.usuarios = ((req, res) => {
 //Insertar usuario
 controllerUser.insertUser = ((req, res) => {
 
-    //validadmos el usuario
-    validarUser(req, res);
+    const validator = validationResult(req);
+    if (validator.errors.length > 0) {
+        res.status(400).json(validator.errors)
+        return;
+    }
 
     const { nombreUsuario, password } = req.body;
     try {
@@ -177,10 +169,24 @@ controllerUser.login = ((req, res) => {
 
 // Control de acceso mediante perfiles
 controllerUser.profile = ((req, res) => {
-    res.status(200).json({
-        id: req['id'],
-        msg: 'Pefil usuario ok'
-    })
+
+    const { id } = req;
+    try {
+        //nos traemos el nombre del usuario
+        connectedDB.query(`SELECT nombreUsuario from usuarios WHERE idUsuario=${id}`, (err, rows) => {
+
+            if (err) throw err;
+
+            res.status(200).json({
+                id: id,
+                User: rows[0].nombreUsuario,
+                msg: 'Pefil usuario ok'
+            })
+        })
+    } catch (error) {
+        console.log(error);
+    }
+
 })
 
 

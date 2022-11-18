@@ -9,6 +9,7 @@ const app = express();
 // importamos las rutas
 const autoresRouter = require("./routes/autoresRouter")
 const userRouter = require("./routes/userRouter")
+const gatitosRouter = require("./routes/gatitos.Router")
 
 // importamos la conexion a la bd
 const connectDB = require("./DBConfig/databaseConfig")
@@ -22,6 +23,7 @@ app.use(express.json());
 // RUTAS
 app.use(autoresRouter);
 app.use(userRouter);
+app.use(gatitosRouter);
 
 // PUERTO DE ESCUCHA (Lo tenemos definido en una variable de entorno)
 app.listen(process.env.SERVER_PORT, () => {
