@@ -4,7 +4,8 @@ const { check } = require("express-validator");
 
 function validarNombreGatito() {
 
-    check("nombre", "El nombre del gatito es obligatorio").not().isEmpty()
+
+    return check("nombre", "El nombre del gatito es obligatorio").not().isEmpty()
 
 }
 
