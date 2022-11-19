@@ -24,7 +24,7 @@ const validateJWt = (req, res, next) => {
         const { idUsuario } = jwt.verify(token, process.env.JWTKey);
 
         // Asignamos este id a un campo de requets para poder usarlo en el controller
-        req.id = idUsuario;
+        req.idUsuario = idUsuario;
 
         next();
 

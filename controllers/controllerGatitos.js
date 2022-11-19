@@ -5,6 +5,9 @@ const controllerGatitos = {};
 // Imprtamos la coneaxion a la bad
 const connectDB = require("../DBConfig/databaseConfig")
 
+// importamos el middlwqre del token
+const { validateJWt } = require("../middlewares/validatorJWT.middleware")
+
 
 // Función para validar el nombre de gato
 const { validationResult } = require("express-validator");
@@ -25,17 +28,17 @@ controllerGatitos.insert = ((req, res) => {
         return;
     }
 
-    //validarGatito(req, res);
-
-
-    const { nombre } = req.body;
-
     try {
-        let query = "INSERT INTO gatitos (nombre) VALUES (?);"
-        connectDB.query(query, [nombre], (err, rows) => {
+        const { nombre } = req.body;
+        const { idUsuario } = req
+
+        let query = "INSERT INTO gatitos (nombre, fk_usuario) VALUES (?, ?);"
+        connectDB.query(query, [nombre, idUsuario], (err, rows) => {
             if (err) throw err;
 
             res.send(`Gatito insertado`)
+
+            console.log(idUsuario);
         });
 
     } catch (error) {
