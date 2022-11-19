@@ -135,7 +135,12 @@ controllerUser.updateUser = ((req, res) => {
 
 // Login usuario
 controllerUser.login = ((req, res) => {
-    validarUser(req, res);
+
+    const validator = validationResult(req);
+    if (validator.errors.length > 0) {
+        res.status(400).json(validator.errors)
+        return;
+    }
     const { nombreUsuario, password } = req.body;
     try {
         let query = "SELECT idUsuario, password FROM usuarios WHERE nombreUsuario=?"
