@@ -10,7 +10,7 @@ const { validateJWt } = require("../middlewares/validatorJWT.middleware")
 
 
 // Función para validar el nombre de gato
-const { validationResult } = require("express-validator");
+//const { validationResult } = require("express-validator");
 
 
 
@@ -22,23 +22,26 @@ const { validationResult } = require("express-validator");
 controllerGatitos.insert = ((req, res) => {
 
 
-    const validator = validationResult(req);
+/*     const validator = validationResult(req);
     if (validator.errors.length > 0) {
         res.status(400).json(validator.errors)
         return;
-    }
+    } */
 
     try {
         const { nombre } = req.body;
-        const { idUsuario } = req
+        const { idUsuario } = req;
 
-        let query = "INSERT INTO gatitos (nombre, fk_usuario) VALUES (?, ?);"
-        connectDB.query(query, [nombre, idUsuario], (err, rows) => {
+        //nos trameos el nombre de la imagen que tenemos en la peticion
+        const foto = req.file.filename;
+
+        let query = "INSERT INTO gatitos (nombre, fk_usuario, foto) VALUES (?, ?, ?);"
+        connectDB.query(query, [nombre, idUsuario, foto], (err, rows) => {
             if (err) throw err;
 
             res.send(`Gatito insertado`)
 
-            console.log(idUsuario);
+
         });
 
     } catch (error) {

@@ -13,7 +13,7 @@ const crearJWT = (idUsuario) => {
         };
 
         jwt.sign(payload, process.env.JWTKey, {
-            expiresIn: '1h'
+            expiresIn: '24h'
         }, (err, token) => {
             if (err) {
                 reject("No se pude generar el jwt")
