@@ -1,5 +1,5 @@
 // limpiamos la consola
-console.clear();
+//console.clear();
 
 // Nos traemos express y lo inicializamos
 
@@ -16,6 +16,12 @@ const connectDB = require("./DBConfig/databaseConfig")
 
 // requerimos las variables de entorno para que ppodenros traer el puerto de esucha
 require('dotenv').config();
+
+//importamos las cors y la usamoms.Esto sirve para que el navegador acepte todas las peticiones y no las bloquee por ejemplo cuando trabajamos 
+//en local y hacemoms peticiones de local a locasl
+const cors = require("cors");
+app.use(cors());
+
 
 // MIDDLEWARES
 app.use(express.json());

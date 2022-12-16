@@ -22,11 +22,11 @@ const { validateJWt } = require("../middlewares/validatorJWT.middleware")
 controllerGatitos.insert = ((req, res) => {
 
 
-/*     const validator = validationResult(req);
-    if (validator.errors.length > 0) {
-        res.status(400).json(validator.errors)
-        return;
-    } */
+    /*     const validator = validationResult(req);
+        if (validator.errors.length > 0) {
+            res.status(400).json(validator.errors)
+            return;
+        } */
 
     try {
         const { nombre } = req.body;
